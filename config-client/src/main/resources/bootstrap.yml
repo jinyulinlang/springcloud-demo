@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      name: zkane-config
+      profile: dev
+      label: master
+      discovery:
+        enabled: true
+        service-id: config-server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@localhost:8000/eureka/

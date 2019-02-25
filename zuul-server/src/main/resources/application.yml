@@ -1,0 +1,37 @@
+server:
+  port: 8500
+spring:
+  application:
+    name: zuul-server
+# 不配置下面的话，代理访问会以service-id来访问，例如：http://localhost:8500/producer-server/get
+#zuul:
+#  routes:
+#    producer:
+#      path: /producer/**
+#      serviceId: producer-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123456@localhost:8000/eureka/
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+    resource:
+      token-info-uri: http://localhost:8050/oauth/check_token
+      service-id: zuul-server
+
+zuul:
+  # 该配置表示哪些敏感头不传递到服务组件
+  sensitiveHeaders:
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 3000
+  ConnectTimeout: 3000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
